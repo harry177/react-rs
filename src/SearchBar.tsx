@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 export class SearchBar extends React.Component {
-  state = { term: '' };
+  state = { term: localStorage.getItem('input') || '' };
 
   onInputChange = (event: ChangeEvent) => {
     this.setState({ term: (event.target as HTMLInputElement).value });
