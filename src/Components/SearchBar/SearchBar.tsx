@@ -23,6 +23,7 @@ export class SearchBar extends React.Component {
             <input
               className="search-input"
               type="text"
+              aria-label="input"
               value={this.state.term}
               onChange={this.onInputChange}
             />
