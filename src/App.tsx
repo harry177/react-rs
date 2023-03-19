@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home } from './Home';
-import { AboutUs } from './AboutUs';
-import { ErrorNotFound } from './ErrorNotFound';
+import { Home } from './Components/Home/Home';
+import { AboutUs } from './Components/AboutUs/AboutUs';
+import { ErrorNotFound } from './Components/ErrorNotFound/ErrorNotFound';
 
 export class App extends React.Component {
   render() {

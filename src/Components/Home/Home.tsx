@@ -1,7 +1,7 @@
-import { CardList } from './CardList';
+import { CardList } from '../CardList/CardList';
 import React from 'react';
-import { Header } from './Header';
-import { SearchBar } from './SearchBar';
+import { Header } from '../Header/Header';
+import { SearchBar } from '../SearchBar/SearchBar';
 import './HomeStyles.css';
 
 export class Home extends React.Component {

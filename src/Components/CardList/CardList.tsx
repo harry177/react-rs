@@ -1,6 +1,6 @@
 import React from 'react';
 import './CardListStyles.css';
-import { Card, ICard } from './Card';
+import { Card, ICard } from '../Card/Card';
 
 const cards: ICard[] = [
   {
