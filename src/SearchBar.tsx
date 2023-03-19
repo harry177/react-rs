@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import './SearchBarStyles.css';
 
 export class SearchBar extends React.Component {
   state = { term: localStorage.getItem('input') || '' };
@@ -13,8 +14,13 @@ export class SearchBar extends React.Component {
       <div className="search-bar">
         <form className="search-form">
           <div className="search-field">
-            <label>Search</label>
-            <input type="text" value={this.state.term} onChange={this.onInputChange} />
+            <label className="search-label">Search</label>
+            <input
+              className="search-input"
+              type="text"
+              value={this.state.term}
+              onChange={this.onInputChange}
+            />
           </div>
         </form>
       </div>

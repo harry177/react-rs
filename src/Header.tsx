@@ -13,8 +13,8 @@ export class Header extends React.Component<IHeader> {
   render() {
     return (
       <div className="header">
-        {this.props.page}
-        <ul>
+        <div className="header-page">{this.props.page}</div>
+        <ul className="header-nav">
           <Link to="/">
             <li>Home</li>
           </Link>

@@ -4,7 +4,7 @@ import { Header } from './Header';
 export class ErrorNotFound extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div className="error-container">
         <Header page="404" />
       </div>
     );
