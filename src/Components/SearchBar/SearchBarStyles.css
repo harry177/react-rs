@@ -1,0 +1,15 @@
+.search-field {
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+}
+
+.search-label {
+    width: 30%;
+}
+
+.search-input {
+    width: 60%;
+    border: plum 3px solid;
+    border-radius: 20px;
+}
