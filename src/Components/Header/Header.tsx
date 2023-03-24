@@ -21,6 +21,9 @@ export class Header extends React.Component<IHeader> {
           <Link to="/about-us">
             <li>About us</li>
           </Link>
+          <Link to="/forms">
+            <li>Forms</li>
+          </Link>
         </ul>
       </div>
     );
