@@ -5,6 +5,7 @@ import { InputText } from '../InputText/InputText';
 import { InputDate } from '../InputDate/InputDate';
 import { InputCheckbox } from '../InputCheckbox/InputCheckbox';
 import { InputSwitch } from '../InputSwitch/InputSwitch';
+import { InputFile } from '../InputFile/InputFile';
 
 export class FormsTable extends React.Component {
   render() {
@@ -23,8 +24,11 @@ export class FormsTable extends React.Component {
           I consent to my personal data:&nbsp;
           <InputCheckbox />
           <br />
-          Choose your gender:&nbsp;
+          Select your gender:&nbsp;
           <InputSwitch />
+          <br />
+          Upload profile picture:&nbsp;
+          <InputFile />
         </label>
       </form>
     );

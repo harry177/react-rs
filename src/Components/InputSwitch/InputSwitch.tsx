@@ -1,23 +1,32 @@
 import React, { ChangeEvent } from 'react';
 
 export class InputSwitch extends React.Component {
-  state = { name: 'React' };
+  state = { gender: '' };
 
-  toggleState(event: ChangeEvent<HTMLInputElement>) {
-    this.setState({
-      selectedOption: event.target.value,
-    });
-  }
+  radioHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    this.setState({ gender: event.target.value });
+  };
 
   render() {
     return (
-      <input
-        className="switch-input"
-        type="radio"
-        checked={this.state.name === 'hhh'}
-        onChange={this.toggleState}
-        value="Male"
-      />
+      <>
+        Male
+        <input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Male"
+          onChange={this.radioHandler}
+        />
+        Female
+        <input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Female"
+          onChange={this.radioHandler}
+        />
+      </>
     );
   }
 }
