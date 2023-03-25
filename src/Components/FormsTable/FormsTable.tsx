@@ -1,38 +1,30 @@
-import { SelectInput } from '../SelectInput/SelectInput';
-import React, { ChangeEvent } from 'react';
+import { InputSelect } from '../InputSelect/InputSelect';
+import React from 'react';
 import './FormsTableStyles.css';
+import { InputText } from '../InputText/InputText';
+import { InputDate } from '../InputDate/InputDate';
+import { InputCheckbox } from '../InputCheckbox/InputCheckbox';
+import { InputSwitch } from '../InputSwitch/InputSwitch';
 
 export class FormsTable extends React.Component {
-  state = { value: '' };
-
-  onInputChange = (event: ChangeEvent) => {
-    this.setState({ value: (event.target as HTMLInputElement).value });
-  };
-
   render() {
     return (
       <form className="form-table">
         <label className="label-form">
           Name:&nbsp;
-          <input
-            className="name-input"
-            type="text"
-            aria-label="input"
-            value={this.state.value}
-            onChange={this.onInputChange}
-          />
+          <InputText />
           <br />
           Date of birth:&nbsp;
-          <input
-            className="date-input"
-            type="date"
-            aria-label="input"
-            value={this.state.value}
-            onChange={this.onInputChange}
-          />
+          <InputDate />
           <br />
           Languages you know:&nbsp;
-          <SelectInput />
+          <InputSelect />
+          <br />
+          I consent to my personal data:&nbsp;
+          <InputCheckbox />
+          <br />
+          Choose your gender:&nbsp;
+          <InputSwitch />
         </label>
       </form>
     );
