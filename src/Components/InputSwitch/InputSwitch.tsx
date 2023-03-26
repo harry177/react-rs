@@ -1,31 +1,19 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 
-export class InputSwitch extends React.Component {
-  state = { gender: '' };
+export interface ICheckbox {
+  maleRef: React.RefObject<HTMLInputElement>;
+  femaleRef: React.RefObject<HTMLInputElement>;
+}
 
-  radioHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ gender: event.target.value });
-  };
-
+export class InputSwitch extends React.Component<ICheckbox> {
   render() {
+    const { maleRef, femaleRef } = this.props;
     return (
       <>
         Male
-        <input
-          className="switch-input"
-          type="radio"
-          name="gender"
-          value="Male"
-          onChange={this.radioHandler}
-        />
+        <input className="switch-input" type="radio" name="gender" value="Male" ref={maleRef} />
         Female
-        <input
-          className="switch-input"
-          type="radio"
-          name="gender"
-          value="Female"
-          onChange={this.radioHandler}
-        />
+        <input className="switch-input" type="radio" name="gender" value="Female" ref={femaleRef} />
       </>
     );
   }

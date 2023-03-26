@@ -1,21 +1,12 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 
-export class InputText extends React.Component {
-  state = { value: '' };
+export interface IInput {
+  childRef: React.RefObject<HTMLInputElement>;
+}
 
-  onInputChange = (event: ChangeEvent) => {
-    this.setState({ value: (event.target as HTMLInputElement).value });
-  };
-
+export class InputText extends React.Component<IInput> {
   render() {
-    return (
-      <input
-        className="name-input"
-        type="text"
-        aria-label="input"
-        value={this.state.value}
-        onChange={this.onInputChange}
-      />
-    );
+    const { childRef } = this.props;
+    return <input className="name-input" type="text" ref={childRef} />;
   }
 }
