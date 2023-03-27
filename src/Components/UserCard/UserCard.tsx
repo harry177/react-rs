@@ -1,4 +1,5 @@
 import React from 'react';
+import './UserCard.css';
 
 export interface IUserCard {
   name: string;
@@ -17,7 +18,6 @@ export class UserCard extends React.Component<IUserCard> {
     return (
       <div className="card">
         <img src={this.props.picture} className="card-picture" alt="picture of card" />
-        <p className="card-name">{this.props.picture}</p>
         <p className="card-name">{this.props.name}</p>
         <p className="card-date">{this.props.date}</p>
         <p className="card-language">{this.props.language}</p>

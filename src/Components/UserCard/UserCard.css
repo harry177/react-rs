@@ -20,14 +20,17 @@
 .card-date {
     width: 100%;
     height: 10%;
+    margin: 0 auto;
 }
 
 .card-gender {
     width: 100%;
     height: 10%;
+    margin: 0 auto;
 }
 
 .card-language {
     width: 100%;
     height: 10%;
+    margin: 0 auto;
 }

@@ -17,6 +17,7 @@ export class FormsTable extends React.Component<IForm> {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  formRef = React.createRef<HTMLFormElement>();
   textInputRef = React.createRef<HTMLInputElement>();
   dateInputRef = React.createRef<HTMLInputElement>();
   selectRef = React.createRef<HTMLSelectElement>();
@@ -37,35 +38,16 @@ export class FormsTable extends React.Component<IForm> {
         : this.radioInputFemaleRef.current?.checked
         ? this.radioInputFemaleRef.current?.value
         : '',
-      picture: this.fileInputRef.current?.value || '',
+      picture: this.fileInputRef.current?.files
+        ? URL.createObjectURL(this.fileInputRef.current.files[0])
+        : '',
     });
-    console.log(this.fileInputRef.current?.value.slice(0, 12));
-    if (this.textInputRef.current) {
-      this.textInputRef.current.value = '';
-    }
-    if (this.dateInputRef.current) {
-      this.dateInputRef.current.value = '';
-    }
-    if (this.selectRef.current) {
-      this.selectRef.current.value = 'Please choose one option';
-    }
-    if (this.checkboxInputRef.current) {
-      this.checkboxInputRef.current.value = '';
-    }
-    if (this.fileInputRef.current) {
-      this.fileInputRef.current.value = '';
-    }
-    if (this.radioInputMaleRef.current) {
-      this.radioInputMaleRef.current.value = '';
-    }
-    if (this.radioInputFemaleRef.current) {
-      this.radioInputFemaleRef.current.value = '';
-    }
+    this.formRef.current?.reset();
   };
 
   render() {
     return (
-      <form className="form-table" onSubmit={this.handleSubmit}>
+      <form className="form-table" onSubmit={this.handleSubmit} ref={this.formRef}>
         <label className="label-form">
           Name:&nbsp;
           <InputText childRef={this.textInputRef} />
