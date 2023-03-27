@@ -11,7 +11,7 @@ export class InputSelect extends React.Component<ISelect> {
     this.setState({ value: event.target.value });
   };
 
-  options: string[] = ['One', 'Two', 'Three', 'Four', 'Five'];
+  options: string[] = ['English', 'German', 'Russian', 'Ukranian', 'Polish'];
 
   render() {
     const { childRef } = this.props;

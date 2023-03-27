@@ -6,9 +6,14 @@ import { InputCheckbox } from '../InputCheckbox/InputCheckbox';
 import { InputSwitch } from '../InputSwitch/InputSwitch';
 import { InputFile } from '../InputFile/InputFile';
 import { InputSelect } from '../InputSelect/InputSelect';
+import { IUserCard } from '../UserCard/UserCard';
 
-export class FormsTable extends React.Component {
-  constructor(props: never) {
+export interface IForm {
+  setData: (data: IUserCard) => void;
+}
+
+export class FormsTable extends React.Component<IForm> {
+  constructor(props: IForm) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -20,21 +25,43 @@ export class FormsTable extends React.Component {
   radioInputFemaleRef = React.createRef<HTMLInputElement>();
   fileInputRef = React.createRef<HTMLInputElement>();
 
-  handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-    console.log(this.textInputRef.current?.value);
-    console.log(this.dateInputRef.current?.value);
-    console.log(this.selectRef.current?.value);
-    console.log(this.checkboxInputRef.current?.checked);
-    console.log(
-      this.radioInputMaleRef.current?.checked
+    this.props.setData({
+      name: this.textInputRef.current?.value || '',
+      date: this.dateInputRef.current?.value || '',
+      language: this.selectRef.current?.value || '',
+      approve: this.checkboxInputRef.current?.checked || false,
+      gender: this.radioInputMaleRef.current?.checked
         ? this.radioInputMaleRef.current?.value
         : this.radioInputFemaleRef.current?.checked
         ? this.radioInputFemaleRef.current?.value
-        : false
-    );
-    console.log(this.fileInputRef.current?.value);
-  }
+        : '',
+      picture: this.fileInputRef.current?.value || '',
+    });
+    console.log(this.fileInputRef.current?.value.slice(0, 12));
+    if (this.textInputRef.current) {
+      this.textInputRef.current.value = '';
+    }
+    if (this.dateInputRef.current) {
+      this.dateInputRef.current.value = '';
+    }
+    if (this.selectRef.current) {
+      this.selectRef.current.value = 'Please choose one option';
+    }
+    if (this.checkboxInputRef.current) {
+      this.checkboxInputRef.current.value = '';
+    }
+    if (this.fileInputRef.current) {
+      this.fileInputRef.current.value = '';
+    }
+    if (this.radioInputMaleRef.current) {
+      this.radioInputMaleRef.current.value = '';
+    }
+    if (this.radioInputFemaleRef.current) {
+      this.radioInputFemaleRef.current.value = '';
+    }
+  };
 
   render() {
     return (
