@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 
 export interface ISelect {
   childRef: React.RefObject<HTMLSelectElement>;
+  errorSelect?: string;
 }
 
 export class InputSelect extends React.Component<ISelect> {
@@ -21,13 +22,16 @@ export class InputSelect extends React.Component<ISelect> {
   ];
 
   render() {
-    const { childRef } = this.props;
+    const { childRef, errorSelect } = this.props;
     return (
-      <select onChange={this.handleChange} ref={childRef}>
-        {this.options.map((option) => {
-          return <option key={option.id}>{option.name}</option>;
-        })}
-      </select>
+      <>
+        <select onChange={this.handleChange} ref={childRef}>
+          {this.options.map((option) => {
+            return <option key={option.id}>{option.name}</option>;
+          })}
+        </select>
+        <div className="error-input">{errorSelect && <div>{errorSelect}</div>}</div>
+      </>
     );
   }
 }

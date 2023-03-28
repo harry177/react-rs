@@ -28,6 +28,9 @@ export class FormsTable extends React.Component<IForm> {
 
   textErrorRef = '';
   dateErrorRef = '';
+  selectErrorRef = '';
+  checkboxErrorRef = '';
+  radioErrorRef = '';
 
   handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -45,15 +48,36 @@ export class FormsTable extends React.Component<IForm> {
         ? URL.createObjectURL(this.fileInputRef.current.files[0])
         : '',
     });
-    if (this.textInputRef.current && !/[A-Z]/.test(this.textInputRef.current.value.charAt(0))) {
+    if (
+      this.textInputRef.current?.value &&
+      !/[A-Z]/.test(this.textInputRef.current.value.charAt(0))
+    ) {
       this.textErrorRef = 'The first letter of your name must be capitalized. Try again';
     } else {
       this.textErrorRef = '';
     }
-    if (this.dateInputRef.current && +this.dateInputRef.current.value.slice(0, 4) > 2005) {
-      this.textErrorRef = 'It seems, you too young to be a RS Student. Try again';
+    if (this.dateInputRef.current?.value && +this.dateInputRef.current.value.slice(0, 4) > 2005) {
+      this.dateErrorRef = 'It seems, you too young to be a RS Student. Try again';
     } else {
-      this.textErrorRef = '';
+      this.dateErrorRef = '';
+    }
+    if (
+      this.selectRef.current?.value &&
+      this.selectRef.current.value === '-- List of languages --'
+    ) {
+      this.selectErrorRef = 'Please, select language from the list. Try again';
+    } else {
+      this.selectErrorRef = '';
+    }
+    if (!this.checkboxInputRef.current?.checked) {
+      this.checkboxErrorRef = 'Please, consent your personal data. Try again';
+    } else {
+      this.checkboxErrorRef = '';
+    }
+    if (!this.radioInputMaleRef.current?.checked && !this.radioInputFemaleRef.current?.checked) {
+      this.radioErrorRef = 'A gender should be selected. Try again';
+    } else {
+      this.radioErrorRef = '';
     }
     this.formRef.current?.reset();
   };
@@ -69,13 +93,17 @@ export class FormsTable extends React.Component<IForm> {
           <InputDate childRef={this.dateInputRef} errorDate={this.dateErrorRef} />
           <br />
           Languages you know:&nbsp;
-          <InputSelect childRef={this.selectRef} />
+          <InputSelect childRef={this.selectRef} errorSelect={this.selectErrorRef} />
           <br />
           I consent to my personal data:&nbsp;
-          <InputCheckbox childRef={this.checkboxInputRef} />
+          <InputCheckbox childRef={this.checkboxInputRef} errorCheckbox={this.checkboxErrorRef} />
           <br />
           Select your gender:&nbsp;
-          <InputSwitch maleRef={this.radioInputMaleRef} femaleRef={this.radioInputFemaleRef} />
+          <InputSwitch
+            maleRef={this.radioInputMaleRef}
+            femaleRef={this.radioInputFemaleRef}
+            errorSwitch={this.radioErrorRef}
+          />
           <br />
           Upload profile picture:&nbsp;
           <InputFile childRef={this.fileInputRef} />

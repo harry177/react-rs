@@ -7,15 +7,18 @@ export class InputCheckbox extends React.Component<IInput> {
   };
 
   render() {
-    const { childRef } = this.props;
+    const { childRef, errorCheckbox } = this.props;
     return (
-      <input
-        className="checkbox-input"
-        type="checkbox"
-        aria-label="input"
-        onChange={this.onInputChange}
-        ref={childRef}
-      />
+      <>
+        <input
+          className="checkbox-input"
+          type="checkbox"
+          aria-label="input"
+          onChange={this.onInputChange}
+          ref={childRef}
+        />
+        <div className="error-input">{errorCheckbox && <div>{errorCheckbox}</div>}</div>
+      </>
     );
   }
 }
