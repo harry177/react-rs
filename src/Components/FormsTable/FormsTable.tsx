@@ -26,6 +26,9 @@ export class FormsTable extends React.Component<IForm> {
   radioInputFemaleRef = React.createRef<HTMLInputElement>();
   fileInputRef = React.createRef<HTMLInputElement>();
 
+  textErrorRef = '';
+  dateErrorRef = '';
+
   handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     this.props.setData({
@@ -42,6 +45,16 @@ export class FormsTable extends React.Component<IForm> {
         ? URL.createObjectURL(this.fileInputRef.current.files[0])
         : '',
     });
+    if (this.textInputRef.current && !/[A-Z]/.test(this.textInputRef.current.value.charAt(0))) {
+      this.textErrorRef = 'The first letter of your name must be capitalized. Try again';
+    } else {
+      this.textErrorRef = '';
+    }
+    if (this.dateInputRef.current && +this.dateInputRef.current.value.slice(0, 4) > 2005) {
+      this.textErrorRef = 'It seems, you too young to be a RS Student. Try again';
+    } else {
+      this.textErrorRef = '';
+    }
     this.formRef.current?.reset();
   };
 
@@ -50,10 +63,10 @@ export class FormsTable extends React.Component<IForm> {
       <form className="form-table" onSubmit={this.handleSubmit} ref={this.formRef}>
         <label className="label-form">
           Name:&nbsp;
-          <InputText childRef={this.textInputRef} />
+          <InputText childRef={this.textInputRef} errorText={this.textErrorRef} />
           <br />
           Date of birth:&nbsp;
-          <InputDate childRef={this.dateInputRef} />
+          <InputDate childRef={this.dateInputRef} errorDate={this.dateErrorRef} />
           <br />
           Languages you know:&nbsp;
           <InputSelect childRef={this.selectRef} />
