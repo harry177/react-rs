@@ -1,0 +1,36 @@
+.card {
+    width: 25%;
+    height: 200px;
+    border: plum 3px solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-picture {
+    width: 100%;
+    height: 50%;
+}
+
+.card-name {
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+}
+
+.card-date {
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+}
+
+.card-gender {
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+}
+
+.card-language {
+    width: 100%;
+    height: 10%;
+    margin: 0 auto;
+}
