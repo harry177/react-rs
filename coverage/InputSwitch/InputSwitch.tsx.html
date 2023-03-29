@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Header/Header.tsx</title>
+    <title>Code coverage report for InputSwitch/InputSwitch.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">Header</a> Header.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">InputSwitch</a> InputSwitch.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>31/31</span>
+                <span class='fraction'>36/36</span>
             </div>
         
             
@@ -94,7 +94,12 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -104,55 +109,65 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import './HeaderStyles.css';
-import { Link } from 'react-router-dom';
 &nbsp;
-export interface IHeader {
-  page: string;
+export interface ICheckbox {
+  maleRef: React.RefObject&lt;HTMLInputElement&gt;;
+  femaleRef: React.RefObject&lt;HTMLInputElement&gt;;
+  errorSwitch: string;
 }
 &nbsp;
-export class Header extends React.Component&lt;IHeader&gt; {
-  constructor(props: IHeader) {
-    super(props);
-  }
+export class InputSwitch extends React.Component&lt;ICheckbox&gt; {
   render() {
+    const { maleRef, femaleRef, errorSwitch } = this.props;
     return (
-      &lt;div className="header"&gt;
-        &lt;div className="header-page"&gt;{this.props.page}&lt;/div&gt;
-        &lt;ul className="header-nav"&gt;
-          &lt;Link to="/"&gt;
-            &lt;li&gt;Home&lt;/li&gt;
-          &lt;/Link&gt;
-          &lt;Link to="/about-us"&gt;
-            &lt;li&gt;About us&lt;/li&gt;
-          &lt;/Link&gt;
-          &lt;Link to="/forms"&gt;
-            &lt;li&gt;Forms&lt;/li&gt;
-          &lt;/Link&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
+      &lt;&gt;
+        Male
+        &lt;input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Male"
+          data-testid="Male"
+          ref={maleRef}
+        /&gt;
+        Female
+        &lt;input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Female"
+          data-testid="Female"
+          ref={femaleRef}
+        /&gt;
+        &lt;div className="error-input"&gt;{errorSwitch &amp;&amp; &lt;div&gt;{errorSwitch}&lt;/div&gt;}&lt;/div&gt;
+      &lt;/&gt;
     );
   }
 }

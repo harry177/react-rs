@@ -16,7 +16,8 @@ export class UserCardContainer extends React.Component<IUserCardContainerProps> 
             +this.props.userData[index]?.date.slice(0, 4) < 2005 &&
             this.props.userData[index]?.language !== '-- List of languages --' &&
             this.props.userData[index]?.approve === true &&
-            this.props.userData[index]?.gender
+            this.props.userData[index]?.gender &&
+            this.props.userData[index]?.picture
           ) {
             return <UserCard key={index} {...card} />;
           } else {

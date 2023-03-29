@@ -25,7 +25,7 @@ export class InputSelect extends React.Component<ISelect> {
     const { childRef, errorSelect } = this.props;
     return (
       <>
-        <select onChange={this.handleChange} ref={childRef}>
+        <select onChange={this.handleChange} ref={childRef} role="listbox">
           {this.options.map((option) => {
             return <option key={option.id}>{option.name}</option>;
           })}

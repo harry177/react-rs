@@ -6,6 +6,7 @@ export interface IInput {
   errorDate?: string;
   errorCheckbox?: string;
   errorSwitch?: string;
+  errorFile?: string;
 }
 
 export class InputText extends React.Component<IInput> {
@@ -13,7 +14,7 @@ export class InputText extends React.Component<IInput> {
     const { childRef, errorText } = this.props;
     return (
       <>
-        <input className="name-input" type="text" ref={childRef} required />
+        <input className="name-input" type="text" ref={childRef} aria-label="input" required />
         <div className="error-input">{errorText && <div>{errorText}</div>}</div>
       </>
     );

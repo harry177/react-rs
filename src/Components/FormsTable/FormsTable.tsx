@@ -31,6 +31,7 @@ export class FormsTable extends React.Component<IForm> {
   selectErrorRef = '';
   checkboxErrorRef = '';
   radioErrorRef = '';
+  fileErrorRef = '';
 
   handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -44,9 +45,10 @@ export class FormsTable extends React.Component<IForm> {
         : this.radioInputFemaleRef.current?.checked
         ? this.radioInputFemaleRef.current?.value
         : '',
-      picture: this.fileInputRef.current?.files
-        ? URL.createObjectURL(this.fileInputRef.current.files[0])
-        : '',
+      picture:
+        this.fileInputRef.current?.files && this.fileInputRef.current?.files[0]
+          ? URL.createObjectURL(this.fileInputRef.current.files[0])
+          : '',
     });
     if (
       this.textInputRef.current?.value &&
@@ -79,6 +81,11 @@ export class FormsTable extends React.Component<IForm> {
     } else {
       this.radioErrorRef = '';
     }
+    if (!this.fileInputRef.current?.value) {
+      this.fileErrorRef = 'You need to upload a picture. Try again';
+    } else {
+      this.fileErrorRef = '';
+    }
     this.formRef.current?.reset();
   };
 
@@ -106,7 +113,7 @@ export class FormsTable extends React.Component<IForm> {
           />
           <br />
           Upload profile picture:&nbsp;
-          <InputFile childRef={this.fileInputRef} />
+          <InputFile childRef={this.fileInputRef} errorFile={this.fileErrorRef} />
         </label>
         <button type="submit">Submit</button>
       </form>

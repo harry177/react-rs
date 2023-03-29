@@ -12,9 +12,23 @@ export class InputSwitch extends React.Component<ICheckbox> {
     return (
       <>
         Male
-        <input className="switch-input" type="radio" name="gender" value="Male" ref={maleRef} />
+        <input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Male"
+          data-testid="Male"
+          ref={maleRef}
+        />
         Female
-        <input className="switch-input" type="radio" name="gender" value="Female" ref={femaleRef} />
+        <input
+          className="switch-input"
+          type="radio"
+          name="gender"
+          value="Female"
+          data-testid="Female"
+          ref={femaleRef}
+        />
         <div className="error-input">{errorSwitch && <div>{errorSwitch}</div>}</div>
       </>
     );
