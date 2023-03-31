@@ -8,17 +8,12 @@ export interface ICard {
   picture: string;
 }
 
-export class Card extends React.Component<ICard> {
-  constructor(props: ICard) {
-    super(props);
-  }
-  render() {
-    return (
-      <div className="card">
-        <img src={this.props.picture} className="card-picture" alt="picture of card" />
-        <p className="card-header">{this.props.header}</p>
-        <div className="card-text">{this.props.text}</div>
-      </div>
-    );
-  }
-}
+export const Card = (props: ICard) => {
+  return (
+    <div className="card">
+      <img src={props.picture} className="card-picture" alt="picture of card" />
+      <p className="card-header">{props.header}</p>
+      <div className="card-text">{props.text}</div>
+    </div>
+  );
+};

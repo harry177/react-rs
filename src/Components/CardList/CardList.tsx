@@ -59,14 +59,12 @@ const cards: ICard[] = [
   },
 ];
 
-export class CardList extends React.Component {
-  render() {
-    return (
-      <div className="cards-container">
-        {cards.map((card: ICard) => {
-          return <Card key={card.id} {...card} />;
-        })}
-      </div>
-    );
-  }
-}
+export const CardList = () => {
+  return (
+    <div className="cards-container">
+      {cards.map((card: ICard) => {
+        return <Card key={card.id} {...card} />;
+      })}
+    </div>
+  );
+};
