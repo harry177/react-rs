@@ -3,9 +3,10 @@ import React, { ChangeEvent } from 'react';
 export interface IInputSelect {
   onChange: (date: string) => void;
   errorSelect: string;
+  value: string;
 }
 
-export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect }) => {
+export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect, value }) => {
   const options = [
     { id: 0, name: '-- List of languages --', value: '' },
     { id: 1, name: 'English', value: 'English' },
@@ -21,7 +22,7 @@ export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect }) =
 
   return (
     <>
-      <select onChange={handleOptionChange} role="listbox">
+      <select onChange={handleOptionChange} role="listbox" value={value}>
         {options.map((option) => {
           return <option key={option.id}>{option.name}</option>;
         })}

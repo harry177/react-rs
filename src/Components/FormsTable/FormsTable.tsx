@@ -85,31 +85,35 @@ export const FormsTable: React.FC<IFormsTable> = ({
     }
 
     formRef.current?.reset();
-    setTimeout(() => {
-      onLanguageChange('');
-      onApproveChange(false);
-      onGenderChange('');
-      onPictureChange('');
-    }, 2000);
+    onTextChange('');
+    onDateChange('');
+    onLanguageChange('');
+    onApproveChange(false);
+    onGenderChange('');
+    onPictureChange('');
   };
 
   return (
     <form className="form-table" onSubmit={handleSubmit} ref={formRef}>
       <label className="label-form">
         Name:&nbsp;
-        <InputText errorText={errorInputText} onChange={onTextChange} />
+        <InputText errorText={errorInputText} onChange={onTextChange} value={name} />
         <br />
         Date of birth:&nbsp;
-        <InputDate errorDate={errorInputDate} onChange={onDateChange} />
+        <InputDate errorDate={errorInputDate} onChange={onDateChange} value={date} />
         <br />
         Languages you know:&nbsp;
-        <InputSelect errorSelect={errorInputSelect} onChange={onLanguageChange} />
+        <InputSelect errorSelect={errorInputSelect} onChange={onLanguageChange} value={language} />
         <br />
         I consent to my personal data:&nbsp;
-        <InputCheckbox errorCheckbox={errorInputCheckbox} onChange={onApproveChange} />
+        <InputCheckbox
+          errorCheckbox={errorInputCheckbox}
+          onChange={onApproveChange}
+          value={approve}
+        />
         <br />
         Select your gender:&nbsp;
-        <InputSwitch errorSwitch={errorInputRadio} onChange={onGenderChange} />
+        <InputSwitch errorSwitch={errorInputRadio} onChange={onGenderChange} value={gender} />
         <br />
         Upload profile picture:&nbsp;
         <InputFile errorFile={errorInputPicture} onChange={onPictureChange} />
