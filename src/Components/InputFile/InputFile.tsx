@@ -1,15 +1,20 @@
-import React from 'react';
-import { IInput } from '../InputText/InputText';
+import React, { ChangeEvent } from 'react';
 
-export class InputFile extends React.Component<IInput> {
-  render() {
-    const { childRef, errorFile } = this.props;
-
-    return (
-      <>
-        <input type="file" ref={childRef} aria-label="input" />
-        <div className="error-input">{errorFile && <div>{errorFile}</div>}</div>
-      </>
-    );
-  }
+export interface IInputFile {
+  onChange: (picture: string) => void;
+  errorFile: string;
 }
+
+export const InputFile: React.FC<IInputFile> = ({ onChange, errorFile }) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const look =
+      event.target.files && event.target.files[0] ? URL.createObjectURL(event.target.files[0]) : '';
+    onChange(look);
+  };
+  return (
+    <>
+      <input type="file" aria-label="input" onChange={handleFileChange} />
+      <div className="error-input">{errorFile && <div>{errorFile}</div>}</div>
+    </>
+  );
+};

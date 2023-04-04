@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-export interface IInput {
-  childRef: React.RefObject<HTMLInputElement>;
-  errorText?: string;
-  errorDate?: string;
-  errorCheckbox?: string;
-  errorSwitch?: string;
-  errorFile?: string;
+export interface IInputText {
+  onChange: (name: string) => void;
+  errorText: string;
 }
-
-export class InputText extends React.Component<IInput> {
-  render() {
-    const { childRef, errorText } = this.props;
-    return (
-      <>
-        <input className="name-input" type="text" ref={childRef} aria-label="input" required />
-        <div className="error-input">{errorText && <div>{errorText}</div>}</div>
-      </>
-    );
-  }
-}
+export const InputText: React.FC<IInputText> = ({ onChange, errorText }) => {
+  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+  return (
+    <>
+      <input
+        className="name-input"
+        type="text"
+        aria-label="input"
+        onChange={handleTextChange}
+        required
+      />
+      <div className="error-input">{errorText && <div>{errorText}</div>}</div>
+    </>
+  );
+};

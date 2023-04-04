@@ -1,14 +1,24 @@
-import React from 'react';
-import { IInput } from '../InputText/InputText';
+import React, { ChangeEvent } from 'react';
 
-export class InputDate extends React.Component<IInput> {
-  render() {
-    const { childRef, errorDate } = this.props;
-    return (
-      <>
-        <input className="date-input" type="date" aria-label="input" ref={childRef} required />
-        <div className="error-input">{errorDate && <div>{errorDate}</div>}</div>
-      </>
-    );
-  }
+export interface IInputDate {
+  onChange: (date: string) => void;
+  errorDate: string;
 }
+
+export const InputDate: React.FC<IInputDate> = ({ onChange, errorDate }) => {
+  const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+  return (
+    <>
+      <input
+        className="date-input"
+        type="date"
+        aria-label="input"
+        onChange={handleDateChange}
+        required
+      />
+      <div className="error-input">{errorDate && <div>{errorDate}</div>}</div>
+    </>
+  );
+};

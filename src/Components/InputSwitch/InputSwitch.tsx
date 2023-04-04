@@ -1,36 +1,35 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 export interface ICheckbox {
-  maleRef: React.RefObject<HTMLInputElement>;
-  femaleRef: React.RefObject<HTMLInputElement>;
+  onChange: (gender: string) => void;
   errorSwitch: string;
 }
 
-export class InputSwitch extends React.Component<ICheckbox> {
-  render() {
-    const { maleRef, femaleRef, errorSwitch } = this.props;
-    return (
-      <>
-        Male
-        <input
-          className="switch-input"
-          type="radio"
-          name="gender"
-          value="Male"
-          data-testid="Male"
-          ref={maleRef}
-        />
-        Female
-        <input
-          className="switch-input"
-          type="radio"
-          name="gender"
-          value="Female"
-          data-testid="Female"
-          ref={femaleRef}
-        />
-        <div className="error-input">{errorSwitch && <div>{errorSwitch}</div>}</div>
-      </>
-    );
-  }
-}
+export const InputSwitch: React.FC<ICheckbox> = ({ onChange, errorSwitch }) => {
+  const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+  return (
+    <>
+      Male
+      <input
+        className="switch-input"
+        type="radio"
+        name="gender"
+        value="Male"
+        data-testid="Male"
+        onChange={handleSwitchChange}
+      />
+      Female
+      <input
+        className="switch-input"
+        type="radio"
+        name="gender"
+        value="Female"
+        data-testid="Female"
+        onChange={handleSwitchChange}
+      />
+      <div className="error-input">{errorSwitch && <div>{errorSwitch}</div>}</div>
+    </>
+  );
+};

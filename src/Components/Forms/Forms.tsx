@@ -1,27 +1,62 @@
 import { FormsTable } from '../FormsTable/FormsTable';
-import React from 'react';
+import React, { useState } from 'react';
 import { Header } from '../Header/Header';
 import './FormsStyles.css';
 import { UserCardContainer } from '../UserCardContainer/UserCardContainer';
-import { IUserCard } from '../UserCard/UserCard';
+import { IUserCard } from 'Components/UserCard/UserCard';
 
-export class Forms extends React.Component<object, { data: IUserCard[] }> {
-  state = { data: [] };
-  setData = (form: IUserCard) => {
-    this.setState((state) => {
-      return {
-        data: [...state.data, form],
-      };
-    });
+export const Forms = () => {
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
+  const [language, setLanguage] = useState('');
+  const [approve, setApprove] = useState(false);
+  const [gender, setGender] = useState('');
+  const [picture, setPicture] = useState('');
+  const [cardsList, setCardsList] = useState<IUserCard[]>([]);
+
+  const handleTextChange = (name: string) => {
+    setName(name);
   };
 
-  render() {
-    return (
-      <div className="container">
-        <Header page="Forms" />
-        <FormsTable setData={this.setData} />
-        <UserCardContainer userData={this.state.data} />
-      </div>
-    );
-  }
-}
+  const handleDateChange = (date: string) => {
+    setDate(date);
+  };
+
+  const handleLanguageChange = (language: string) => {
+    setLanguage(language);
+  };
+
+  const handleApproveChange = (approve: boolean) => {
+    setApprove(approve);
+  };
+
+  const handleGenderChange = (gender: string) => {
+    setGender(gender);
+  };
+
+  const handlePictureChange = (picture: string) => {
+    setPicture(picture);
+  };
+
+  return (
+    <div className="container">
+      <Header page="Forms" />
+      <FormsTable
+        name={name}
+        date={date}
+        language={language}
+        approve={approve}
+        gender={gender}
+        picture={picture}
+        onTextChange={handleTextChange}
+        onDateChange={handleDateChange}
+        onLanguageChange={handleLanguageChange}
+        onApproveChange={handleApproveChange}
+        onGenderChange={handleGenderChange}
+        onPictureChange={handlePictureChange}
+        onSubmit={setCardsList}
+      />
+      <UserCardContainer userData={cardsList} />
+    </div>
+  );
+};

@@ -6,25 +6,23 @@ export interface IUserCardContainerProps {
   userData: IUserCard[];
 }
 
-export class UserCardContainer extends React.Component<IUserCardContainerProps> {
-  render() {
-    return (
-      <div className="cards-container">
-        {this.props.userData.map((card: IUserCard, index) => {
-          if (
-            /[A-Z]/.test(this.props.userData[index]?.name?.charAt(0)) &&
-            +this.props.userData[index]?.date.slice(0, 4) < 2005 &&
-            this.props.userData[index]?.language !== '-- List of languages --' &&
-            this.props.userData[index]?.approve === true &&
-            this.props.userData[index]?.gender &&
-            this.props.userData[index]?.picture
-          ) {
-            return <UserCard key={index} {...card} />;
-          } else {
-            return null;
-          }
-        })}
-      </div>
-    );
-  }
-}
+export const UserCardContainer: React.FC<IUserCardContainerProps> = ({ userData }) => {
+  return (
+    <div className="cards-container">
+      {userData.map((card: IUserCard, index) => {
+        if (
+          /[A-Z]/.test(userData[index]?.name?.charAt(0)) &&
+          +userData[index]?.date.slice(0, 4) < 2005 &&
+          userData[index]?.language !== '-- List of languages --' &&
+          userData[index]?.approve &&
+          userData[index]?.gender &&
+          userData[index]?.picture
+        ) {
+          return <UserCard key={index} {...card} />;
+        } else {
+          return null;
+        }
+      })}
+    </div>
+  );
+};

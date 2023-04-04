@@ -1,18 +1,12 @@
 import React, { ChangeEvent } from 'react';
 
-export interface ISelect {
-  childRef: React.RefObject<HTMLSelectElement>;
-  errorSelect?: string;
+export interface IInputSelect {
+  onChange: (date: string) => void;
+  errorSelect: string;
 }
 
-export class InputSelect extends React.Component<ISelect> {
-  state = { value: '' };
-
-  handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    this.setState({ value: event.target.value });
-  };
-
-  options = [
+export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect }) => {
+  const options = [
     { id: 0, name: '-- List of languages --', value: '' },
     { id: 1, name: 'English', value: 'English' },
     { id: 2, name: 'German', value: 'German' },
@@ -21,17 +15,18 @@ export class InputSelect extends React.Component<ISelect> {
     { id: 5, name: 'Polish', value: 'Polish' },
   ];
 
-  render() {
-    const { childRef, errorSelect } = this.props;
-    return (
-      <>
-        <select onChange={this.handleChange} ref={childRef} role="listbox">
-          {this.options.map((option) => {
-            return <option key={option.id}>{option.name}</option>;
-          })}
-        </select>
-        <div className="error-input">{errorSelect && <div>{errorSelect}</div>}</div>
-      </>
-    );
-  }
-}
+  const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    onChange(event.target.value);
+  };
+
+  return (
+    <>
+      <select onChange={handleOptionChange} role="listbox">
+        {options.map((option) => {
+          return <option key={option.id}>{option.name}</option>;
+        })}
+      </select>
+      <div className="error-input">{errorSelect && <div>{errorSelect}</div>}</div>
+    </>
+  );
+};
