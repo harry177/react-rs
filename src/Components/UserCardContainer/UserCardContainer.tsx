@@ -11,9 +11,9 @@ export const UserCardContainer: React.FC<IUserCardContainerProps> = ({ userData 
     <div className="cards-container">
       {userData.map((card: IUserCard, index) => {
         if (
-          /[A-Z]/.test(userData[index]?.name?.charAt(0)) &&
-          +userData[index]?.date.slice(0, 4) < 2005 &&
-          userData[index]?.language !== '-- List of languages --' &&
+          userData[index]?.name.length > 3 &&
+          +userData[index]?.date.slice(0, 4) <= 2005 &&
+          userData[index]?.language !== '' &&
           userData[index]?.approve &&
           userData[index]?.gender &&
           userData[index]?.picture

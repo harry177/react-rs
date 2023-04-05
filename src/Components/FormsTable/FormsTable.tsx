@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import './FormsTableStyles.css';
 import { InputText } from '../InputText/InputText';
 import { InputDate } from '../InputDate/InputDate';
@@ -40,49 +41,12 @@ export const FormsTable: React.FC<IFormsTable> = ({
   onPictureChange,
 }) => {
   const formRef = React.useRef<HTMLFormElement | null>(null);
-  const [errorInputText, setErrorInputText] = useState<string>('');
-  const [errorInputDate, setErrorInputDate] = useState<string>('');
-  const [errorInputSelect, setErrorInputSelect] = useState<string>('');
-  const [errorInputCheckbox, setErrorInputCheckbox] = useState<string>('');
-  const [errorInputRadio, setErrorInputRadio] = useState<string>('');
-  const [errorInputPicture, setErrorInputPicture] = useState<string>('');
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
+  const handleForm: SubmitHandler<FieldValues> = () => {
     const cardData = { name, date, language, approve, gender, picture };
     onSubmit((prevState) => {
       return [...prevState, cardData];
     });
-    if (name && !/[A-Z]/.test(name.charAt(0))) {
-      setErrorInputText('The first letter of your name must be capitalized. Try again');
-    } else {
-      setErrorInputText('');
-    }
-    if (date && +date.slice(0, 4) > 2005) {
-      setErrorInputDate('It seems, you too young to be a RS Student. Try again');
-    } else {
-      setErrorInputDate('');
-    }
-    if (language && language === '-- List of languages --') {
-      setErrorInputSelect('Please, select language from the list. Try again');
-    } else {
-      setErrorInputSelect('');
-    }
-    if (!approve) {
-      setErrorInputCheckbox('Please, consent your personal data. Try again');
-    } else {
-      setErrorInputCheckbox('');
-    }
-    if (!gender) {
-      setErrorInputRadio('A gender should be selected. Try again');
-    } else {
-      setErrorInputRadio('');
-    }
-    if (!picture) {
-      setErrorInputPicture('You need to upload a picture. Try again');
-    } else {
-      setErrorInputPicture('');
-    }
 
     formRef.current?.reset();
     onTextChange('');
@@ -93,32 +57,100 @@ export const FormsTable: React.FC<IFormsTable> = ({
     onPictureChange('');
   };
 
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   return (
-    <form className="form-table" onSubmit={handleSubmit} ref={formRef}>
+    <form className="form-table" onSubmit={handleSubmit(handleForm)} ref={formRef}>
       <label className="label-form">
         Name:&nbsp;
-        <InputText errorText={errorInputText} onChange={onTextChange} value={name} />
+        <InputText
+          value={name}
+          label="textLabel"
+          register={register}
+          required={true}
+          minLength={4}
+          onChange={onTextChange}
+        />
+        <div className="error-input">
+          {errors?.textLabel?.type === 'required' && (
+            <p>The field cannot be empty. Please, enter your name</p>
+          )}
+          {errors?.textLabel?.type === 'minLength' && (
+            <p>The length of name must be at least 4 characters long. Try again</p>
+          )}
+        </div>
         <br />
         Date of birth:&nbsp;
-        <InputDate errorDate={errorInputDate} onChange={onDateChange} value={date} />
+        <InputDate
+          value={date}
+          label="dateLabel"
+          register={register}
+          required
+          validate={(date) => +date.slice(0, 4) <= 2005}
+          onChange={onDateChange}
+        />
+        <div className="error-input">
+          {errors?.dateLabel?.type === 'required' && (
+            <p>The field cannot be empty. Please, enter your birth date</p>
+          )}
+          {errors?.dateLabel?.type === 'validate' && (
+            <p>The year of birth cannot be more than 2005. Try again</p>
+          )}
+        </div>
         <br />
         Languages you know:&nbsp;
-        <InputSelect errorSelect={errorInputSelect} onChange={onLanguageChange} value={language} />
+        <InputSelect
+          value={language}
+          label="selectLabel"
+          register={register}
+          required
+          onChange={onLanguageChange}
+        />
+        <div className="error-input">
+          {errors?.selectLabel?.type === 'required' && (
+            <p>Language should be selected. Try again</p>
+          )}
+        </div>
         <br />
         I consent to my personal data:&nbsp;
         <InputCheckbox
-          errorCheckbox={errorInputCheckbox}
-          onChange={onApproveChange}
+          required
           value={approve}
+          label="checkboxLabel"
+          register={register}
+          onChange={onApproveChange}
         />
+        <div className="error-input">
+          {errors?.checkboxLabel?.type === 'required' && <p>Please, fill this field.</p>}
+        </div>
         <br />
         Select your gender:&nbsp;
-        <InputSwitch errorSwitch={errorInputRadio} onChange={onGenderChange} value={gender} />
+        <InputSwitch
+          label="radioLabel"
+          register={register}
+          onChange={onGenderChange}
+          value={gender}
+          required
+        />
+        <div className="error-input">
+          {errors?.radioLabel?.type === 'required' && <p>Please, fill this field.</p>}
+        </div>
         <br />
         Upload profile picture:&nbsp;
-        <InputFile errorFile={errorInputPicture} onChange={onPictureChange} />
+        <InputFile label="fileLabel" register={register} onChange={onPictureChange} required />
+        <div className="error-input">
+          {errors?.fileLabel?.type === 'required' && (
+            <p>You should upload your profile picture. Try again</p>
+          )}
+        </div>
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" className="button-submit">
+        Submit
+      </button>
     </form>
   );
 };

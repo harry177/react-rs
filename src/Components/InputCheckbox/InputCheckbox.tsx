@@ -1,12 +1,25 @@
 import React, { ChangeEvent } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 export interface IInputChecknox {
   onChange: (approve: boolean) => void;
-  errorCheckbox: string;
   value: boolean;
+  register: UseFormRegister<FieldValues>;
+  required: boolean;
+  label: Path<IFormValues>;
 }
 
-export const InputCheckbox: React.FC<IInputChecknox> = ({ onChange, errorCheckbox, value }) => {
+export interface IFormValues {
+  checkboxLabel: string;
+}
+
+export const InputCheckbox: React.FC<IInputChecknox> = ({
+  onChange,
+  value,
+  register,
+  required,
+  label,
+}) => {
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.checked);
   };
@@ -14,13 +27,15 @@ export const InputCheckbox: React.FC<IInputChecknox> = ({ onChange, errorCheckbo
   return (
     <>
       <input
+        {...register(label, {
+          required,
+        })}
         className="checkbox-input"
         type="checkbox"
         aria-label="input"
         onChange={handleCheckboxChange}
         checked={value}
       />
-      <div className="error-input">{errorCheckbox && <div>{errorCheckbox}</div>}</div>
     </>
   );
 };

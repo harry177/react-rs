@@ -1,19 +1,31 @@
 import React, { ChangeEvent } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 export interface IInputSelect {
   onChange: (date: string) => void;
-  errorSelect: string;
   value: string;
+  register: UseFormRegister<FieldValues>;
+  required: boolean;
+  label: Path<IFormValues>;
 }
 
-export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect, value }) => {
+export interface IFormValues {
+  selectLabel: string;
+}
+
+export const InputSelect: React.FC<IInputSelect> = ({
+  onChange,
+  value,
+  register,
+  required,
+  label,
+}) => {
   const options = [
-    { id: 0, name: '-- List of languages --', value: '' },
-    { id: 1, name: 'English', value: 'English' },
-    { id: 2, name: 'German', value: 'German' },
-    { id: 3, name: 'Ukranian', value: 'Ukranian' },
-    { id: 4, name: 'Russian', value: 'Russian' },
-    { id: 5, name: 'Polish', value: 'Polish' },
+    { id: 0, name: 'English', value: 'English' },
+    { id: 1, name: 'German', value: 'German' },
+    { id: 2, name: 'Ukranian', value: 'Ukranian' },
+    { id: 3, name: 'Russian', value: 'Russian' },
+    { id: 4, name: 'Polish', value: 'Polish' },
   ];
 
   const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -22,12 +34,21 @@ export const InputSelect: React.FC<IInputSelect> = ({ onChange, errorSelect, val
 
   return (
     <>
-      <select onChange={handleOptionChange} role="listbox" value={value}>
+      <select
+        {...register(label, {
+          required,
+        })}
+        onChange={handleOptionChange}
+        role="listbox"
+        value={value}
+      >
+        <option hidden value="">
+          -- List of languages --
+        </option>
         {options.map((option) => {
           return <option key={option.id}>{option.name}</option>;
         })}
       </select>
-      <div className="error-input">{errorSelect && <div>{errorSelect}</div>}</div>
     </>
   );
 };

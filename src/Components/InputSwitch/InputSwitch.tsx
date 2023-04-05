@@ -1,12 +1,25 @@
 import React, { ChangeEvent } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 export interface ICheckbox {
   onChange: (gender: string) => void;
-  errorSwitch: string;
   value: string;
+  register: UseFormRegister<FieldValues>;
+  required: boolean;
+  label: Path<IFormValues>;
 }
 
-export const InputSwitch: React.FC<ICheckbox> = ({ onChange, errorSwitch, value }) => {
+export interface IFormValues {
+  radioLabel: string;
+}
+
+export const InputSwitch: React.FC<ICheckbox> = ({
+  onChange,
+  value,
+  register,
+  required,
+  label,
+}) => {
   const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -14,6 +27,9 @@ export const InputSwitch: React.FC<ICheckbox> = ({ onChange, errorSwitch, value 
     <>
       Male
       <input
+        {...register(label, {
+          required,
+        })}
         className="switch-input"
         type="radio"
         name="gender"
@@ -24,6 +40,9 @@ export const InputSwitch: React.FC<ICheckbox> = ({ onChange, errorSwitch, value 
       />
       Female
       <input
+        {...register(label, {
+          required,
+        })}
         className="switch-input"
         type="radio"
         name="gender"
@@ -32,7 +51,6 @@ export const InputSwitch: React.FC<ICheckbox> = ({ onChange, errorSwitch, value 
         checked={value === 'Female'}
         onChange={handleSwitchChange}
       />
-      <div className="error-input">{errorSwitch && <div>{errorSwitch}</div>}</div>
     </>
   );
 };

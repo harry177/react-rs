@@ -1,11 +1,18 @@
 import React, { ChangeEvent } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 export interface IInputFile {
   onChange: (picture: string) => void;
-  errorFile: string;
+  register: UseFormRegister<FieldValues>;
+  required: boolean;
+  label: Path<IFormValues>;
 }
 
-export const InputFile: React.FC<IInputFile> = ({ onChange, errorFile }) => {
+export interface IFormValues {
+  fileLabel: string;
+}
+
+export const InputFile: React.FC<IInputFile> = ({ onChange, register, required, label }) => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const look =
       event.target.files && event.target.files[0] ? URL.createObjectURL(event.target.files[0]) : '';
@@ -13,8 +20,14 @@ export const InputFile: React.FC<IInputFile> = ({ onChange, errorFile }) => {
   };
   return (
     <>
-      <input type="file" aria-label="input" onChange={handleFileChange} />
-      <div className="error-input">{errorFile && <div>{errorFile}</div>}</div>
+      <input
+        type="file"
+        aria-label="input"
+        {...register(label, {
+          required,
+        })}
+        onChange={handleFileChange}
+      />
     </>
   );
 };

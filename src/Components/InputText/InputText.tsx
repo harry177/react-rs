@@ -1,11 +1,27 @@
 import React, { ChangeEvent } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
 export interface IInputText {
   onChange: (name: string) => void;
-  errorText: string;
   value: string;
+  register: UseFormRegister<FieldValues>;
+  required: boolean;
+  label: Path<IFormValues>;
+  minLength: number;
 }
-export const InputText: React.FC<IInputText> = ({ onChange, errorText, value }) => {
+
+export interface IFormValues {
+  textLabel: string;
+}
+
+export const InputText: React.FC<IInputText> = ({
+  onChange,
+  value,
+  register,
+  required,
+  label,
+  minLength,
+}) => {
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
@@ -15,11 +31,10 @@ export const InputText: React.FC<IInputText> = ({ onChange, errorText, value }) 
         className="name-input"
         type="text"
         aria-label="input"
+        {...register(label, { required, minLength })}
         onChange={handleTextChange}
         value={value}
-        required
       />
-      <div className="error-input">{errorText && <div>{errorText}</div>}</div>
     </>
   );
 };
