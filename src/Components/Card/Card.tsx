@@ -1,19 +1,13 @@
 import React from 'react';
 import './CardStyles.css';
+import { IUser } from '../CardList/CardList';
 
-export interface ICard {
-  id: number;
-  header: string;
-  text: string;
-  picture: string;
-}
-
-export const Card = (props: ICard) => {
+export const Card = (props: IUser) => {
   return (
     <div className="card">
-      <img src={props.picture} className="card-picture" alt="picture of card" />
-      <p className="card-header">{props.header}</p>
-      <div className="card-text">{props.text}</div>
+      <img src={props.image} className="card-picture" alt="picture of card" />
+      <p className="card-header">{props.name}</p>
+      <div className="card-text">{props.status}</div>
     </div>
   );
 };
