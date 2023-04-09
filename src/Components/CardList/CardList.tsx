@@ -17,7 +17,7 @@ interface ICardList {
 }
 
 export const CardList: React.FC<ICardList> = ({ request }) => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const apiURL = 'https://rickandmortyapi.com/api/character';
@@ -31,13 +31,13 @@ export const CardList: React.FC<ICardList> = ({ request }) => {
         setLoading(false);
       }, 1000);
 
-      if (data && request !== undefined) {
+      if (request !== undefined) {
         const yupi = data.results.filter((user: IUser) => {
           return user.name.toLowerCase().includes(request.toLowerCase());
         });
         setUsers(yupi);
       } else {
-        setUsers(data.results);
+        setUsers([]);
       }
     };
     fetchData();
@@ -49,6 +49,7 @@ export const CardList: React.FC<ICardList> = ({ request }) => {
         (users as []).map((user: IUser) => {
           return <Card key={user.id} {...user} />;
         })}
+      {!users[0] && <p>Nothing was found on your request...</p>}
       {loading ? (
         <div className="loader">
           <Loader />
