@@ -9,18 +9,16 @@ interface Props {
 
 export const CardModal = ({ active, setActive, children }: Props) => (
   <div
-    className={active ? 'authorize__popup active' : 'authorize__popup'}
+    className={active ? 'modal active' : 'modal'}
     onMouseDown={() => setActive(false)}
     role="button"
     tabIndex={0}
-    aria-label="signup"
   >
     <div
-      className={active ? 'popup__inner active' : 'popup__inner'}
+      className={active ? 'modal__inner active' : 'modal__inner'}
       onMouseDown={(item) => item.stopPropagation()}
       role="button"
       tabIndex={0}
-      aria-label="signup"
     >
       {children}
     </div>

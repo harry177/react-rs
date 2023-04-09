@@ -1,4 +1,4 @@
-.authorize__popup {
+.modal {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,12 +13,12 @@
     pointer-events: none;
   }
   
-  .authorize__popup.active {
+  .modal.active {
     opacity: 1;
     pointer-events: all;
   }
   
-  .popup__inner {
+  .modal__inner {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -34,7 +34,7 @@
     transition: 0.4s all;
   }
   
-  .popup__inner.active {
+  .modal__inner.active {
     transform: scale(1);
   }
   
