@@ -11,7 +11,11 @@ export interface IUser {
   image: string;
 }
 
-export const CardList = () => {
+interface ICardList {
+  request: string | undefined;
+}
+
+export const CardList: React.FC<ICardList> = ({ request }) => {
   const [users, setUsers] = useState();
 
   const apiURL = 'https://rickandmortyapi.com/api/character';
@@ -19,18 +23,24 @@ export const CardList = () => {
   const fetchData = async () => {
     const response = await fetch(apiURL);
     const data = await response.json();
-
-    setUsers(data.results);
-    console.log(data.results);
+    console.log(request);
+    if (data && request !== undefined) {
+      const yupi = data.results.filter((user: IUser) => {
+        return user.name.toLowerCase().includes(request.toLowerCase());
+      });
+      setUsers(yupi);
+    } else {
+      setUsers(data.results);
+    }
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [request]);
 
   return (
     <div className="cards-container">
-      {users &&
+      {((users && request) || users) &&
         (users as []).map((user: IUser) => {
           return <Card key={user.id} {...user} />;
         })}
