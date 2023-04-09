@@ -28,7 +28,7 @@ export const SearchBar: React.FC<ISubmit> = (props: ISubmit) => {
   };
 
   const buttonInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === 'Enter') {
+    if (event.code === 'Enter' || event.code === 'NumpadEnter') {
       event.preventDefault();
       props.onClick(initialValue.current);
     }

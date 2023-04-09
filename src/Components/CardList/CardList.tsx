@@ -20,21 +20,19 @@ export const CardList: React.FC<ICardList> = ({ request }) => {
 
   const apiURL = 'https://rickandmortyapi.com/api/character';
 
-  const fetchData = async () => {
-    const response = await fetch(apiURL);
-    const data = await response.json();
-    console.log(request);
-    if (data && request !== undefined) {
-      const yupi = data.results.filter((user: IUser) => {
-        return user.name.toLowerCase().includes(request.toLowerCase());
-      });
-      setUsers(yupi);
-    } else {
-      setUsers(data.results);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(apiURL);
+      const data = await response.json();
+      if (data && request !== undefined) {
+        const yupi = data.results.filter((user: IUser) => {
+          return user.name.toLowerCase().includes(request.toLowerCase());
+        });
+        setUsers(yupi);
+      } else {
+        setUsers(data.results);
+      }
+    };
     fetchData();
   }, [request]);
 
