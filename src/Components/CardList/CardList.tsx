@@ -25,19 +25,38 @@ export const CardList: React.FC<ICardList> = ({ request }) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      const response = await fetch(apiURL);
-      const data = await response.json();
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
-
       if (request !== undefined) {
-        const yupi = data.results.filter((user: IUser) => {
-          return user.name.toLowerCase().includes(request.toLowerCase());
-        });
-        setUsers(yupi);
+        const davai = apiURL + `/?name=${request}`;
+
+        const response = await fetch(davai);
+
+        if (response?.ok) {
+          const data = await response.json();
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+          setUsers(data.results);
+        } else {
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+          setUsers([]);
+        }
       } else {
-        setUsers([]);
+        const chance = apiURL + `/?name=${users}`;
+        const response = await fetch(chance);
+        if (response?.ok) {
+          const data = await response.json();
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+          setUsers(data.results);
+        } else {
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
+          setUsers([]);
+        }
       }
     };
     fetchData();

@@ -25,12 +25,14 @@ export const SearchBar: React.FC<ISubmit> = (props: ISubmit) => {
   const updateInput = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     props.onClick(initialValue.current);
+    localStorage.setItem('input', initialValue.current);
   };
 
   const buttonInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter' || event.code === 'NumpadEnter') {
       event.preventDefault();
       props.onClick(initialValue.current);
+      localStorage.setItem('input', initialValue.current);
     }
   };
 

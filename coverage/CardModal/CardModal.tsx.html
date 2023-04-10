@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for InputFile/InputFile.tsx</title>
+    <title>Code coverage report for CardModal/CardModal.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">InputFile</a> InputFile.tsx</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">CardModal</a> CardModal.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.87% </span>
+                <span class="strong">42.3% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/33</span>
+                <span class='fraction'>11/26</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.87% </span>
+                <span class="strong">42.3% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/33</span>
+                <span class='fraction'>11/26</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -89,14 +89,7 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -106,62 +99,48 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { ChangeEvent } from 'react';
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
+import './CardModal.css';
 &nbsp;
-export interface IInputFile {
-  onChange: (picture: string) =&gt; void;
-  register: UseFormRegister&lt;FieldValues&gt;;
-  required: boolean;
-  label: Path&lt;IFormValues&gt;;
+interface Props {
+  active: boolean;
+  setActive: (value: boolean) =&gt; void;
+  children: JSX.Element | JSX.Element[];
 }
 &nbsp;
-export interface IFormValues {
-  fileLabel: string;
-}
-&nbsp;
-export const InputFile: React.FC&lt;IInputFile&gt; = ({ onChange, register, required, label }) =&gt; {
-  const handleFileChange = <span class="fstat-no" title="function not covered" >(event: ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const look =</span>
-<span class="cstat-no" title="statement not covered" >      event.target.files &amp;&amp; event.target.files[0] ? URL.createObjectURL(event.target.files[0]) : '';</span>
-<span class="cstat-no" title="statement not covered" >    onChange(look);</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-  return (
-    &lt;&gt;
-      &lt;input
-        type="file"
-        aria-label="input"
-        {...register(label, {
-          required,
-        })}
-        onChange={handleFileChange}
-      /&gt;
-    &lt;/&gt;
-  );
-};
+export const CardModal = <span class="fstat-no" title="function not covered" >({ active, setActive, children }: Props) =&gt; (</span>
+<span class="cstat-no" title="statement not covered" >  &lt;div</span>
+<span class="cstat-no" title="statement not covered" >    className={active ? 'modal active' : 'modal'}</span>
+<span class="cstat-no" title="statement not covered" >    onMouseDown={() =&gt; setActive(false)}</span>
+<span class="cstat-no" title="statement not covered" >    role="button"</span>
+<span class="cstat-no" title="statement not covered" >    tabIndex={0}</span>
+<span class="cstat-no" title="statement not covered" >  &gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div</span>
+<span class="cstat-no" title="statement not covered" >      className={active ? 'modal__inner active' : 'modal__inner'}</span>
+<span class="cstat-no" title="statement not covered" >      onMouseDown={(item) =&gt; item.stopPropagation()}</span>
+<span class="cstat-no" title="statement not covered" >      role="button"</span>
+<span class="cstat-no" title="statement not covered" >      tabIndex={0}</span>
+<span class="cstat-no" title="statement not covered" >    &gt;</span>
+<span class="cstat-no" title="statement not covered" >      {children}</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  &lt;/div&gt;</span></span>
+);
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

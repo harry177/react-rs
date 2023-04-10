@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">85.96% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>46/46</span>
+                <span class='fraction'>49/57</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">85.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>46/46</span>
+                <span class='fraction'>49/57</span>
             </div>
         
             
@@ -109,10 +109,28 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -127,12 +145,16 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -158,17 +180,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import './SearchBarStyles.css';
 &nbsp;
-export const SearchBar = () =&gt; {
-  // state = { term: localStorage.getItem('input') || '' };
+export interface IState {
+  searchValue: string;
+}
+interface ISubmit {
+  onClick: (name: string | undefined) =&gt; void;
+}
 &nbsp;
+export const SearchBar: React.FC&lt;ISubmit&gt; = (props: ISubmit) =&gt; {
   const [state, setState] = useState(localStorage.getItem('input') || '');
   const initialValue = useRef('');
-&nbsp;
-  /* componentWillUnmount() {
-    if (this.state.term) {
-      localStorage.setItem('input', this.state.term);
-    }
-  } */
 &nbsp;
   useEffect(() =&gt; {
     initialValue.current = state;
@@ -180,9 +201,17 @@ export const SearchBar = () =&gt; {
     };
   }, []);
 &nbsp;
-  /* onInputChange = (event: ChangeEvent) =&gt; {
-    this.setState({ term: (event.target as HTMLInputElement).value });
-  }; */
+  const updateInput = <span class="fstat-no" title="function not covered" >(event: React.MouseEvent&lt;HTMLButtonElement&gt;) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >    props.onClick(initialValue.current);</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
+&nbsp;
+  const buttonInput = <span class="fstat-no" title="function not covered" >(event: React.KeyboardEvent&lt;HTMLInputElement&gt;) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (event.code === 'Enter' || event.code === 'NumpadEnter') {</span>
+<span class="cstat-no" title="statement not covered" >      event.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >      props.onClick(initialValue.current);</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 &nbsp;
   return (
     &lt;div className="search-bar"&gt;
@@ -195,7 +224,11 @@ export const SearchBar = () =&gt; {
             aria-label="input"
             value={state}
             onChange={<span class="fstat-no" title="function not covered" >(event: ChangeEvent) =&gt; setState((event.target as HTMLInputElement).value)}</span>
+            onKeyDown={buttonInput}
           /&gt;
+          &lt;button type="button" onClick={updateInput}&gt;
+            Request
+          &lt;/button&gt;
         &lt;/div&gt;
       &lt;/form&gt;
     &lt;/div&gt;
@@ -208,7 +241,7 @@ export const SearchBar = () =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-04T04:25:40.467Z
+                at 2023-04-10T00:06:03.009Z
             </div>
         <script src="../prettify.js"></script>
         <script>
