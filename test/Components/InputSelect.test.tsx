@@ -7,8 +7,17 @@ describe('InputSelect component', () => {
   test('Should show existance of select element and matching of one option value', () => {
     render(
       <InputSelect
-        childRef={React.createRef<HTMLSelectElement>()}
-        errorSelect={'Please, select language from the list. Try again' || ''}
+        onChange={(name: string) => {}}
+        value="English"
+        register={(name: string) => ({
+          required: true,
+          onBlur: undefined,
+          onChange: (e) => console.log(e),
+          ref: undefined,
+          name: 'select',
+        })}
+        required
+        label="selectLabel"
       />
     );
     const select: HTMLSelectElement = screen.getByRole('listbox');

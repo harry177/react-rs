@@ -25,6 +25,7 @@ export const InputDate: React.FC<IInputDate> = ({
   const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange(event.target.value);
   };
+  console.log(value);
   return (
     <>
       <input

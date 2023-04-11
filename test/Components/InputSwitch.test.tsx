@@ -7,9 +7,17 @@ describe('InputSwitch component', () => {
   test('Should show existance of input element and input type', () => {
     render(
       <InputSwitch
-        maleRef={React.createRef<HTMLInputElement>()}
-        femaleRef={React.createRef<HTMLInputElement>()}
-        errorSwitch={'A gender should be selected. Try again' || ''}
+        onChange={(gender: string) => {}}
+        value="Male"
+        register={(name: string) => ({
+          required: true,
+          onBlur: undefined,
+          onChange: (e) => console.log(e),
+          ref: undefined,
+          name: 'input',
+        })}
+        required
+        label="radioLabel"
       />
     );
     const input: HTMLInputElement[] = screen.getAllByRole('radio');

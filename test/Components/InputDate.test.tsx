@@ -7,8 +7,18 @@ describe('InputDate component', () => {
   test('Should show existance of input element and input type', () => {
     render(
       <InputDate
-        childRef={React.createRef<HTMLInputElement>()}
-        errorDate={'It seems, you too young to be a RS Student. Try again' || ''}
+        onChange={(name: string) => {}}
+        value={'2023-04-05'}
+        register={(name: string) => ({
+          required: true,
+          onBlur: undefined,
+          onChange: (e) => console.log(e),
+          ref: undefined,
+          name: 'input',
+        })}
+        required
+        label="dateLabel"
+        validate={(date) => +date.slice(0, 4) <= 2005}
       />
     );
     const input: HTMLInputElement = screen.getByLabelText('input');

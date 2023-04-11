@@ -7,8 +7,19 @@ describe('InputText component', () => {
   test('Should show existance of input element and input type', () => {
     render(
       <InputText
-        childRef={React.createRef<HTMLInputElement>()}
-        errorText={'The first letter of your name must be capitalized. Try again' || ''}
+        onChange={(name: string) => {}}
+        value="John"
+        required={true}
+        register={(name: string) => ({
+          required: true,
+          minLength: 4,
+          onBlur: undefined,
+          onChange: (e) => console.log(e),
+          ref: undefined,
+          name: 'input',
+        })}
+        label="textLabel"
+        minLength={4}
       />
     );
     const input: HTMLInputElement = screen.getByLabelText('input');

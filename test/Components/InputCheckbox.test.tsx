@@ -7,8 +7,17 @@ describe('InputCheckbox component', () => {
   test('Should show existance of input element and input type', () => {
     render(
       <InputCheckbox
-        childRef={React.createRef<HTMLInputElement>()}
-        errorCheckbox={'Please, consent your personal data. Try again' || ''}
+        onChange={(approve: boolean) => {}}
+        value
+        register={(name: string) => ({
+          required: true,
+          onBlur: undefined,
+          onChange: (e) => console.log(e),
+          ref: undefined,
+          name: 'input',
+        })}
+        required
+        label="checkboxLabel"
       />
     );
     const input: HTMLInputElement = screen.getByLabelText('input');
