@@ -1,0 +1,27 @@
+.card {
+  width: 25%;
+  height: 200px;
+  border: plum 3px solid;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.card-picture {
+  width: 100%;
+  height: 50%;
+}
+
+.card-header {
+  width: 100%;
+  height: 15%;
+  margin: 0 auto;
+}
+
+.card-text {
+  width: 100%;
+  height: 35%;
+}
+
+.modal-string {
+  margin: 0 auto;
+}

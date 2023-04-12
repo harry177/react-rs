@@ -1,0 +1,14 @@
+.error-input {
+    color: red;
+}
+
+.form-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 20px;
+}
+
+.button-submit {
+    border: limegreen solid 2px;
+}
