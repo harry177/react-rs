@@ -1,38 +1,32 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../app/store';
+import { TypedUseSelectorHook } from 'react-redux';
+import { updateClick, buttonClick } from '../../app/searchBarSlice';
 import './SearchBarStyles.css';
 
 export interface IState {
   searchValue: string;
 }
-interface ISubmit {
-  onClick: (name: string | undefined) => void;
-}
 
-export const SearchBar: React.FC<ISubmit> = (props: ISubmit) => {
-  const [state, setState] = useState(localStorage.getItem('input') || '');
-  const initialValue = useRef('');
+export const SearchBar = () => {
+  const configSelector: TypedUseSelectorHook<RootState> = useSelector;
+  const searchInput = configSelector((state) => state.search.search);
+  const [state, setState] = useState(searchInput);
 
-  useEffect(() => {
-    initialValue.current = state;
-  }, [state]);
+  const useConfigDispatch = () => useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    return () => {
-      localStorage.setItem('input', initialValue.current);
-    };
-  }, []);
+  const updateDispatch = useConfigDispatch();
 
   const updateInput = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    props.onClick(initialValue.current);
-    localStorage.setItem('input', initialValue.current);
+    updateDispatch(updateClick(state));
   };
 
   const buttonInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.code === 'Enter' || event.code === 'NumpadEnter') {
       event.preventDefault();
-      props.onClick(initialValue.current);
-      localStorage.setItem('input', initialValue.current);
+      updateDispatch(buttonClick(state));
     }
   };
 
