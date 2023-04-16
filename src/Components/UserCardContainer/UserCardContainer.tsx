@@ -1,22 +1,25 @@
 import { IUserCard, UserCard } from '../UserCard/UserCard';
 import React from 'react';
 import './UserCardContainer.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
+import { TypedUseSelectorHook } from 'react-redux';
 
-export interface IUserCardContainerProps {
-  userData: IUserCard[];
-}
+export const UserCardContainer = () => {
+  const configSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const UserCardContainer: React.FC<IUserCardContainerProps> = ({ userData }) => {
+  const savedForm = configSelector((state) => state.forms.forms);
+
   return (
     <div className="cards-container">
-      {userData.map((card: IUserCard, index) => {
+      {savedForm.map((card: IUserCard, index) => {
         if (
-          userData[index]?.name.length > 3 &&
-          +userData[index]?.date.slice(0, 4) <= 2005 &&
-          userData[index]?.language !== '' &&
-          userData[index]?.approve &&
-          userData[index]?.gender &&
-          userData[index]?.picture
+          savedForm[index]?.name.length > 3 &&
+          +savedForm[index]?.date.slice(0, 4) <= 2005 &&
+          savedForm[index]?.language !== '' &&
+          savedForm[index]?.approve &&
+          savedForm[index]?.gender &&
+          savedForm[index]?.picture
         ) {
           return <UserCard key={index} {...card} />;
         } else {

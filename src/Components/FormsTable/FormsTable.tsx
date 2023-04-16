@@ -7,7 +7,9 @@ import { InputCheckbox } from '../InputCheckbox/InputCheckbox';
 import { InputSwitch } from '../InputSwitch/InputSwitch';
 import { InputFile } from '../InputFile/InputFile';
 import { InputSelect } from '../InputSelect/InputSelect';
-import { IUserCard } from 'Components/UserCard/UserCard';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../app/store';
+import { formSubmit } from '../../app/formsTableSlice';
 
 export interface IFormsTable {
   name: string;
@@ -16,7 +18,6 @@ export interface IFormsTable {
   approve: boolean;
   gender: string;
   picture: string;
-  onSubmit: React.Dispatch<React.SetStateAction<IUserCard[]>>;
   onTextChange: (name: string) => void;
   onDateChange: (date: string) => void;
   onLanguageChange: (language: string) => void;
@@ -32,7 +33,6 @@ export const FormsTable: React.FC<IFormsTable> = ({
   approve,
   gender,
   picture,
-  onSubmit,
   onTextChange,
   onDateChange,
   onLanguageChange,
@@ -42,12 +42,21 @@ export const FormsTable: React.FC<IFormsTable> = ({
 }) => {
   const formRef = React.useRef<HTMLFormElement | null>(null);
 
-  const handleForm: SubmitHandler<FieldValues> = () => {
-    const cardData = { name, date, language, approve, gender, picture };
-    onSubmit((prevState) => {
-      return [...prevState, cardData];
-    });
+  const useConfigDispatch = () => useDispatch<AppDispatch>();
 
+  const updateDispatch = useConfigDispatch();
+
+  const handleForm: SubmitHandler<FieldValues> = () => {
+    updateDispatch(
+      formSubmit({
+        name,
+        date,
+        language,
+        approve,
+        gender,
+        picture,
+      })
+    );
     formRef.current?.reset();
     onTextChange('');
     onDateChange('');

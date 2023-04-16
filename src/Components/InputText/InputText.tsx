@@ -23,6 +23,7 @@ export const InputText: React.FC<IInputText> = ({
   minLength,
 }) => {
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     onChange(event.target.value);
   };
   return (

@@ -26,9 +26,6 @@ export const CardList: React.FC<ICardList> = () => {
 
   const { data = [], isSuccess, isError, isFetching } = useGetCharactersQuery(fetchState);
 
-  console.log(data);
-  console.log(fetchState);
-
   return (
     <div className="cards-container">
       {isSuccess &&

@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Header } from '../Header/Header';
 import './FormsStyles.css';
 import { UserCardContainer } from '../UserCardContainer/UserCardContainer';
-import { IUserCard } from 'Components/UserCard/UserCard';
 
 export const Forms = () => {
   const [name, setName] = useState('');
@@ -12,7 +11,6 @@ export const Forms = () => {
   const [approve, setApprove] = useState(false);
   const [gender, setGender] = useState('');
   const [picture, setPicture] = useState('');
-  const [cardsList, setCardsList] = useState<IUserCard[]>([]);
 
   const handleTextChange = (name: string) => {
     setName(name);
@@ -54,9 +52,8 @@ export const Forms = () => {
         onApproveChange={handleApproveChange}
         onGenderChange={handleGenderChange}
         onPictureChange={handlePictureChange}
-        onSubmit={setCardsList}
       />
-      <UserCardContainer userData={cardsList} />
+      <UserCardContainer />
     </div>
   );
 };
