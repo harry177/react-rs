@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { newApprove } from '../../app/formFieldSlice';
+import { AppDispatch } from '../../app/store';
+import React, { ChangeEvent, memo } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 export interface IInputChecknox {
-  onChange: (approve: boolean) => void;
   value: boolean;
   register: UseFormRegister<FieldValues>;
   required: boolean;
@@ -10,32 +12,29 @@ export interface IInputChecknox {
 }
 
 export interface IFormValues {
-  checkboxLabel: string;
+  checkboxLabel: boolean;
 }
 
-export const InputCheckbox: React.FC<IInputChecknox> = ({
-  onChange,
-  value,
-  register,
-  required,
-  label,
-}) => {
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.checked);
-  };
+export const InputCheckbox: React.FC<IInputChecknox> = memo(
+  ({ value, register, required, label }) => {
+    const useConfigDispatch = () => useDispatch<AppDispatch>();
+    const updateDispatch = useConfigDispatch();
 
-  return (
-    <>
-      <input
-        {...register(label, {
-          required,
-        })}
-        className="checkbox-input"
-        type="checkbox"
-        aria-label="input"
-        onChange={handleCheckboxChange}
-        checked={value}
-      />
-    </>
-  );
-};
+    return (
+      <>
+        <input
+          {...register(label, {
+            required,
+          })}
+          className="checkbox-input"
+          type="checkbox"
+          aria-label="input"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            updateDispatch(newApprove((event.target as HTMLInputElement).checked))
+          }
+          checked={value}
+        />
+      </>
+    );
+  }
+);

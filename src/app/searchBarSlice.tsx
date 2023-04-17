@@ -14,11 +14,9 @@ const searchBarSlice = createSlice({
   initialState,
   reducers: {
     updateClick(state, action: PayloadAction<string>) {
-      console.log(action);
       state.search = action.payload;
     },
     buttonClick(state, action: PayloadAction<string>) {
-      console.log(action);
       state.search = action.payload;
     },
   },

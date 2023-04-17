@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { newGender } from '../../app/formFieldSlice';
+import { AppDispatch } from '../../app/store';
+import React, { ChangeEvent, memo } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 export interface ICheckbox {
-  onChange: (gender: string) => void;
   value: string;
   register: UseFormRegister<FieldValues>;
   required: boolean;
@@ -13,16 +15,9 @@ export interface IFormValues {
   radioLabel: string;
 }
 
-export const InputSwitch: React.FC<ICheckbox> = ({
-  onChange,
-  value,
-  register,
-  required,
-  label,
-}) => {
-  const handleSwitchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
+export const InputSwitch: React.FC<ICheckbox> = memo(({ value, register, required, label }) => {
+  const useConfigDispatch = () => useDispatch<AppDispatch>();
+  const updateDispatch = useConfigDispatch();
   return (
     <>
       Male
@@ -36,7 +31,9 @@ export const InputSwitch: React.FC<ICheckbox> = ({
         value="Male"
         data-testid="Male"
         checked={value === 'Male'}
-        onChange={handleSwitchChange}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          updateDispatch(newGender((event.target as HTMLInputElement).value))
+        }
       />
       Female
       <input
@@ -49,8 +46,10 @@ export const InputSwitch: React.FC<ICheckbox> = ({
         value="Female"
         data-testid="Female"
         checked={value === 'Female'}
-        onChange={handleSwitchChange}
+        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          updateDispatch(newGender((event.target as HTMLInputElement).value))
+        }
       />
     </>
   );
-};
+});

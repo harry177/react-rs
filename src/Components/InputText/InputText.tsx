@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { newName } from '../../app/formFieldSlice';
+import { AppDispatch } from 'app/store';
+import React, { ChangeEvent, memo } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 export interface IInputText {
-  onChange: (name: string) => void;
   value: string;
   register: UseFormRegister<FieldValues>;
   required: boolean;
@@ -14,28 +16,24 @@ export interface IFormValues {
   textLabel: string;
 }
 
-export const InputText: React.FC<IInputText> = ({
-  onChange,
-  value,
-  register,
-  required,
-  label,
-  minLength,
-}) => {
-  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    onChange(event.target.value);
-  };
-  return (
-    <>
-      <input
-        className="name-input"
-        type="text"
-        aria-label="input"
-        {...register(label, { required, minLength })}
-        onChange={handleTextChange}
-        value={value}
-      />
-    </>
-  );
-};
+export const InputText: React.FC<IInputText> = memo(
+  ({ value, register, required, label, minLength }) => {
+    const useConfigDispatch = () => useDispatch<AppDispatch>();
+    const updateDispatch = useConfigDispatch();
+
+    return (
+      <>
+        <input
+          className="name-input"
+          type="text"
+          aria-label="input"
+          {...register(label, { required, minLength })}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            updateDispatch(newName((event.target as HTMLInputElement).value))
+          }
+          value={value}
+        />
+      </>
+    );
+  }
+);

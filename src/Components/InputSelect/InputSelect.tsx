@@ -1,8 +1,10 @@
-import React, { ChangeEvent } from 'react';
+import { newLanguage } from '../../app/formFieldSlice';
+import { AppDispatch } from '../../app/store';
+import React, { ChangeEvent, memo } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 export interface IInputSelect {
-  onChange: (date: string) => void;
   value: string;
   register: UseFormRegister<FieldValues>;
   required: boolean;
@@ -13,13 +15,7 @@ export interface IFormValues {
   selectLabel: string;
 }
 
-export const InputSelect: React.FC<IInputSelect> = ({
-  onChange,
-  value,
-  register,
-  required,
-  label,
-}) => {
+export const InputSelect: React.FC<IInputSelect> = memo(({ value, register, required, label }) => {
   const options = [
     { id: 0, name: 'English', value: 'English' },
     { id: 1, name: 'German', value: 'German' },
@@ -28,9 +24,8 @@ export const InputSelect: React.FC<IInputSelect> = ({
     { id: 4, name: 'Polish', value: 'Polish' },
   ];
 
-  const handleOptionChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    onChange(event.target.value);
-  };
+  const useConfigDispatch = () => useDispatch<AppDispatch>();
+  const updateDispatch = useConfigDispatch();
 
   return (
     <>
@@ -38,7 +33,9 @@ export const InputSelect: React.FC<IInputSelect> = ({
         {...register(label, {
           required,
         })}
-        onChange={handleOptionChange}
+        onChange={(event: ChangeEvent<HTMLSelectElement>) =>
+          updateDispatch(newLanguage(event.target.value))
+        }
         role="listbox"
         value={value}
       >
@@ -51,4 +48,4 @@ export const InputSelect: React.FC<IInputSelect> = ({
       </select>
     </>
   );
-};
+});
